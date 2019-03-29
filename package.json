@@ -1,0 +1,25 @@
+{
+  "name": "video_maker",
+  "version": "1.0.0",
+  "description": "- Responsável pela entrada de dados do usuário\r *`npm i readline-sync`*\r - Robot of text:\r *`npm i algorithmia`*\r *` npm i sbd`*",
+  "main": "index.js",
+  "dependencies": {
+    "algorithmia": "^0.3.10",
+    "readline-sync": "^1.4.9",
+    "sbd": "^1.0.14"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adailsonacj/video_maker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Adailsonacj/video_maker/issues"
+  },
+  "homepage": "https://github.com/Adailsonacj/video_maker#readme"
+}
