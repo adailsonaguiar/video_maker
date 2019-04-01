@@ -4,7 +4,6 @@ const algorithmiaApiKey = require('../credentials/algorithmia.json').apiKey
 const sentenceBoundaryDetection = require('sbd')
 const watsonApiKey = require('../credentials/watson.json').apikey
 const state = require('./state.js')
-
 const NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
 
 const nlu = new NaturalLanguageUnderstandingV1({
@@ -20,7 +19,7 @@ async function robot() {
     sanitizaContent(content)
     breakContentIntoSentences(content)
     limitMaximumSentences(content)
-    await fetchKeywordOfAllSentences(content)
+    await fetchKeywordsOfAllSentences(content)
 
     state.save(content)
 
@@ -70,20 +69,19 @@ async function robot() {
                 images: []
             })
         })
-        console.log(sentences)
     }
 
     function limitMaximumSentences(content) {
-        content.sentences = content.sentences.slice(0, content.limitMaximumSentences)
+        content.sentences = content.sentences.slice(0, content.maximumSentences)
     }
 
-    async function fetchKeywordOfAllSentences(content){
-        for(const sentence of content.sentences){
-            sentence.keywords = await fetchWatsonAdnReturnKeywords(sentence.text)
+    async function fetchKeywordsOfAllSentences(content) {
+        for (const sentence of content.sentences) {
+            sentence.keywords = await fetchWatsonAndReturnKeywords(sentence.text)
         }
     }
 
-    async function fetchWatsonAdnReturnKeywords(sentence) {
+    async function fetchWatsonAndReturnKeywords(sentence) {
         return new Promise((resolve, reject) => {
             nlu.analyze({
                 text: sentence,
@@ -94,9 +92,11 @@ async function robot() {
                 if (error) {
                     throw error
                 }
+
                 const keywords = response.keywords.map((keyword) => {
                     return keyword.text
                 })
+
                 resolve(keywords)
             })
         })
