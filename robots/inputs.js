@@ -8,6 +8,7 @@ function robot() {
 
     content.searchTerm = askAndReturnSearchTerm()
     content.prefix = askAndReturnPrefix()
+    console.log(content)
     state.save(content)
 
     function askAndReturnSearchTerm() {

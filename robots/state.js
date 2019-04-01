@@ -6,11 +6,12 @@ function save(content) {
     return fs.writeFileSync(contentFilePath, contenString)
 }
 function load() {
-    const fileBuffer = fs.readFileSync(content, 'utf-8')
+    const fileBuffer = fs.readFileSync(contentFilePath, 'utf-8')
     const contentJson = JSON.parse(fileBuffer)
     return contentJson
 }
 
 module.exports = {
-    save, load
+    save,
+    load
 }
